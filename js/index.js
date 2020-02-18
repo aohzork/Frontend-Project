@@ -3,63 +3,12 @@ let teamsLength = 30;
 let teams = [];    //holding class-instances of teams from api
 let heroes = new Array();   //holding class-instances of heroes from api
 
+//initiate team instances with arbitrary data
 for(let i =0; i < 2; i++)
     teams.push(new Team(3,1,1,1,"hello","hello"));
 
-/*$(function(){
-    $('.click-expand').click(function()
-    {
-        
-        //let expands = $(".team-expand");
-        //console.log(expands);
-        alert('index: '+ $(".team-expand").index('.team-expand'));          //$(this).index('.team-expand'));
-    });
-});*/
-
-
-
-/* Get all the items with Duplicate id
-var $itemsThatHasIdDuplicate = $('[id]').filter(function () {
-    return $('[id="' + this.id + '"]').length > 1;
-});
-
- Modify the id for all of them
-$itemsThatHasIdDuplicate.attr('id', function (i, val) {
-    return 'newID' + (i + 1);
-});*/
-
-
-/*function expandOnClick() {
-    let x = document.getElementById("team-expand-item");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-}*/
-
-/*function expando(){
-    for(let i = 0; i < teamExpands.length; i++)
-}*/
-
-
 $(document).ready(function(){
 
-   
-    
-    /*$('.click-expand').click(function(){
-        let clickedBtn = $('.click-expand').index($(this));
-        console.log(clickedBtn);
-
-        let expandTeamHTML = $('.team-expand');
-        if(expandTeamHTML[clickedBtn].style.display=== "none") {
-            expandTeamHTML[clickedBtn].style.display = "flex";
-        } 
-        else {
-            expandTeamHTML[clickedBtn].style.display = "none";
-        }
-    
-    });*/
 
     let urls = ["https://api.opendota.com/api/teams"]
         //,"https://api.opendota.com/api/heroStats"];
@@ -72,6 +21,7 @@ $(document).ready(function(){
             //console.log(data[500]);
             switch(i){
                 case 0:
+                    //change arbitrary data for api-data
                     for(let y = 0; y < 2; y++){
                         teams[y].teamId = data[y].team_id;
                         teams[y].rating = data[y].rating;
