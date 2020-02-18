@@ -60,6 +60,14 @@ $(document).ready(function(){
 
 function displayTeams(){
 
+    //combine and sort out data from all these apis in different ways
+    //to get the data needed for each team
+    //https://api.opendota.com/api/teams
+    //https://api.opendota.com/api/teams/1838315/heroes
+    //https://api.opendota.com/api/teams/{team_id}/heroes
+    //https://api.opendota.com/api/leagues
+    
+
     let placeHeader = document.getElementById('content');
     let teamHeader = `<div class="team-header-container">
         <div class="team-header-content">name</div>
@@ -159,17 +167,16 @@ function displayTeams(){
         </div>
     </div><!--end team & expand-->`;
 
+    //later for-loop < teamslength, create html for all teams
     placeTeams.innerHTML = teamItem;
     
-    console.log($('.team-item'));
-    //$('.team-item')
-    let val = 1234;
-
     /*$('.team-item').each(function(i){
         this.id = `${teams[i].teamId}`;
-    });*/
+    });
+    
+    console.log($('.team-item'));*/
 
-    let vall = 1;
+    //populate each team with data
     for(let i = 0; i <1; i++){
         $('.team-item').eq(i).attr("id",`${teams[i].teamId}`);
         $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
