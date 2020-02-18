@@ -128,23 +128,26 @@ function displayTeams(){
                 <div class="flex-item">
                     <img src="img\\dotabg.jpg" class="team-logo" alt="">
                     <div>
-                        <span>team</span><br>
-                        <button class="click-expand">click me</button>
+                        <span class="team-name">team</span><br>
+                        <button class="click-expand">Show teamdetails</button>
                     </div>
                 </div>                
             </div>
             
-            <div class="team-content">11245
+            <div class="team-content">
+                <span class="team-rating">11245</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color1"></div>
                 </div>
             </div>
-            <div class="team-content">500
+            <div class="team-content">
+                <span class="team-wins">11245</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color2"></div>
                 </div>
             </div>
-            <div class="team-content">300
+            <div class="team-content">
+                <span class="team-losses">300</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color2"></div>
                 </div>
@@ -162,9 +165,9 @@ function displayTeams(){
                 <div class="expand-container">
                     <div class="expand-content">    
                         <div class="flex-item">
-                            <img src="img\\dotabg.jpg" class="team-logo" alt="">
+                            <img src="img\\dotabg.jpg" class="hero-img" alt="">
                             <div>
-                                <span>team</span><br>
+                                <span class="hero-name">hero</span><br>
                             </div>
                         </div>      
                     </div>
@@ -218,7 +221,16 @@ function displayTeams(){
 
     let vall = 1;
     for(let i = 0; i <1; i++){
-        $('.team-item').eq(i).attr("id",`${val}`);
+        $('.team-item').eq(i).attr("id",`${teams[i].teamId}`);
+        $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
+        $('.team-name').eq(i).text(`${teams[i].name}`);
+        $('.team-rating').eq(i).text(`${teams[i].rating}`);
+        $('.team-wins').eq(i).text(`${teams[i].wins}`);
+        $('.team-losses').eq(i).text(`${teams[i].losses}`);
+        let lossesCSS = teams[i].losses/(teams[i].wins + teams[i].losses);
+        let winsCSS = teams[i].wins/(teams[i].wins + teams[i].losses);
+        console.log(lossesCSS);
+        console.log(winsCSS);
     }
 
     //assign clickfunction to show more teamdetails
