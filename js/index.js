@@ -206,13 +206,13 @@ function displayTeams(){
                 </div>
             </div>  
         </td>
-        <td class="expand-content">
+        <td class="expand-content games-played">
             <span>1</span>
             <div class="team-meter-outer">
                 <div class="team-meter-inner meter-color2"></div>
             </div>
         </td>
-        <td class="expand-content">
+        <td class="expand-content winrate">
             <span>1</span>
             <div class="team-meter-outer">
                 <div class="team-meter-inner meter-color2"></div>
