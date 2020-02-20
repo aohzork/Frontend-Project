@@ -121,22 +121,25 @@ function displayTeams(){
                 <div class="flex-item">
                     <img src="img\\dotabg.jpg" class="team-logo" alt="">
                     <div>
-                        <span>team</span><br>
+                        <span class="team-name">team</span><br>
                         <button class="click-expand">click me</button>
                     </div>
                 </div>                
             </div>                    
-            <div class="team-content">11245
+            <div class="team-content">
+                <span class="team-rating">11245</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color1"></div>
                 </div>
             </div>
-            <div class="team-content">500
+            <div class="team-content team-wins">
+                <span>500</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color2"></div>
                 </div>
             </div>
-            <div class="team-content">300
+            <div class="team-content team-losses">
+                <span>300</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color2"></div>
                 </div>
@@ -156,8 +159,8 @@ function displayTeams(){
             <div class="expand-item">
                 <table>
                     <thead>
-                        <th >Played Leagues games</th>
-                        <th >wins</th>
+                        <th>Played Leagues games</th>
+                        <th>wins</th>
                         <th>losses</th>
                     </thead>
                     <tbody class="expand-container" id="team-id"><!--insert league html here-->
@@ -238,44 +241,17 @@ function displayTeams(){
         $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
         $('.team-name').eq(i).text(`${teams[i].name}`);
         $('.team-rating').eq(i).text(`${teams[i].rating}`);
-        $('.team-wins').eq(i).text(`${teams[i].wins}`);
-        $('.team-losses').eq(i).text(`${teams[i].losses}`);
-        let lossesCSS = teams[i].losses/(teams[i].wins + teams[i].losses);
-        let winsCSS = teams[i].wins/(teams[i].wins + teams[i].losses);
+        $('.team-wins > span').eq(i).text(`${teams[i].wins}`);
+        $('.team-losses > span').eq(i).text(`${teams[i].losses}`);
+        let lossesCSS = teams[i].losses/(teams[i].wins + teams[i].losses)*100;
+        let winsCSS = teams[i].wins/(teams[i].wins + teams[i].losses)*100;
+        $('.team-wins > div > div').eq(i).width(`${winsCSS}%`);
+        $('.team-losses > div > div').eq(i).width(`${lossesCSS}%`);
         console.log(lossesCSS);
         console.log(winsCSS);
         $('.click-expand').eq(i).attr("id", `${teams[i].teamId}`);
         $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].teamId);
     }
-
-    /*let placeHeroes = document.getElementById("hero-items-" + id);
-    //console.log(placeHeroes);    
-    let heroItem = `<div class="expand-container" id="hero-name">
-        <div class="expand-content">    
-            <div class="flex-item">
-                <img src="img\\dotabg.jpg" class="hero-img" alt="">
-                <div>
-                    <span class="hero-name">hero</span><br>
-                </div>
-            </div>      
-        </div>
-        <div class="expand-content">
-            <span class="hero-item-wins">1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
-        </div>
-        <div class="expand-content">
-            <span class="hero-item-losses">1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
-        </div>
-    </div>`;
-
-    for(let i = 0; i < 2; i ++){
-        placeHeroes.innerHTML += heroItem;
-    }*/
 
     //assign clickfunction to show more teamdetails
     $('.click-expand').click(function(){
