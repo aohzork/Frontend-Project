@@ -319,17 +319,16 @@ body {
     text-transform: uppercase;
 }
 
-.team-header-content:first-child{
+.team-header-content:first-child, .team-content:first-child{
     flex:2;
 }
-.team-header-content:nth-child(n+2){
+.team-header-content:nth-child(n+2), .team-content:nth-child(n+2){
     flex:1;
 }
 
 .team-container{
     display: flex;
     background: slategrey;
-    
 }
 
 .team-container, .team-content{
@@ -350,14 +349,6 @@ body {
 .flex-item{
     display: flex;
     align-items: center;
-}
-
-.team-container .team-content:first-child{
-    flex:2;
-}
-
-.team-container .team-content:nth-child(n+2){
-    flex:1;
 }
 
 .team-meter-outer{
@@ -384,7 +375,7 @@ body {
 **************************************/
 
 .team-expand{
-    height: 100px;
+    height: 100%;
     background-color: lightcoral;
     display: flex;
    
@@ -392,44 +383,23 @@ body {
 
 .expand-item{
     flex:1;
-    
 }
 
-.expand-header-container, .expand-header-content{
-    height: auto;
+table{
+    width: 100%;
+    border:1px solid;    
 }
 
-.expand-header-container{
-    display: flex;
-    background: grey;
-    
+thead{
+    text-align: left;
 }
 
-.expand-header-content{
-    padding: 7px 0;
-    text-transform: uppercase;   
+td:first-child{
+    border:1px solid;
+    width:67%;
 }
-
-/*.expand-header-content:first-child{
-    flex:2;
-}
-.expand-header-content:nth-child(n+2){
-    flex:1;
-}*/
-
-.expand-header-content:nth-child(1){
-    flex:2;
-}
-.expand-header-content:nth-child(2){
-    flex:1;
-}
-.expand-header-content:nth-child(3){
-    flex:1;
-}
-
-
-.expand-container{
-    display: flex;
+td:nth-child(n+2){
+   width:16.5%;
 }
 
 .expand-container, .expand-content{
@@ -445,23 +415,4 @@ body {
     height: 56.25px;
     padding: 7px;
     vertical-align: middle;
-}
-
-
-
-/*.expand-container .expand-content:first-child{
-    flex:2;
-}
-.expand-container .expand-content:nth-child(n+2){
-    flex:1;
-}*/
-
-.expand-content:nth-child(1){
-    flex:2;
-}
-.expand-content:nth-child(2){
-    flex:1;
-}
-.expand-content:nth-child(3){
-    flex:1;
 }
