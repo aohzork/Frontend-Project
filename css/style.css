@@ -377,7 +377,7 @@ body {
 .team-expand{
     height: 100%;
     background-color: lightcoral;
-    display: flex;
+    display: none;
    
 }
 
@@ -399,7 +399,7 @@ td:first-child{
     width:67%;
 }
 td:nth-child(n+2){
-   width:16.5%;
+   width:33%;
 }
 
 .expand-container, .expand-content{

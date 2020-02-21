@@ -150,8 +150,7 @@ function displayTeams(){
                 <table>
                     <thead>
                         <th >most played heroes</th>
-                        <th >wins</th>
-                        <th>losses</th>
+                        <th>wins/played games</th>
                     </thead>
                     <tbody class="expand-heroes" id="hero-items-"><!-- generate hero html here--></tbody>
                 </table>                                                                    
@@ -202,15 +201,9 @@ function displayTeams(){
             <div class="flex-item">
                 <img src="img\\dotabg.jpg" class="hero-img" alt="">
                 <div>
-                    <span>hero</span>
+                    <span class="hero-name">hero</span>
                 </div>
             </div>  
-        </td>
-        <td class="expand-content games-played">
-            <span>1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
         </td>
         <td class="expand-content winrate">
             <span>1</span>
@@ -264,11 +257,11 @@ function displayTeams(){
         //console.log(passID);
         expandItems(passID);
 
-        if(expandTeamHTML[clickedBtn].style.display=== "none") {
-            expandTeamHTML[clickedBtn].style.display = "flex";
+        if(expandTeamHTML[clickedBtn].style.display=== "flex") {
+            expandTeamHTML[clickedBtn].style.display = "none";
         } 
         else {
-            expandTeamHTML[clickedBtn].style.display = "none";
+            expandTeamHTML[clickedBtn].style.display = "flex";
         }
     
     });
@@ -276,112 +269,88 @@ function displayTeams(){
     
 }
 
+//populate hero data and league data when click button
 function expandItems(btnID){
     let id = btnID;
     console.log(heroes);
 
+    let heroLength = 5;
+    let hImgURL = [];
+    let heroData = [];
+
+    
+    //get team hero data
     let teamsHeroUrl = "https://api.opendota.com/api/teams/" + id + "/heroes";
     fetch(teamsHeroUrl).then(resp => resp.json()).then(function(data){
-        let heroData = [];
-        let tmpHeroData;
-        for(let i = 0; i < 5; i++){
+
+    
+        
+       
+        for(let i = 0; i < heroLength; i++){
             heroData[i] = data[i];
+            hImgURL[i] = heroes.filter(function(item){
+                return item.id === heroData[i].hero_id;
+            }).map(function(item){
+                return item.img;
+            });
+            
         }
+
         console.log(data);
-        console.log(heroData);
+        console.log(heroData[0].hero_id);
+        console.log(hImgURL[0]);
+                
     })
     .catch(function(error){
         console.log("cannot fetch data from " + teamsHeroUrl);
+    }).then(function(){
+        //populate heroes with data
+        for(let i = 0; i < heroLength; i++){
+            $('.hero-img').eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
+            $('.hero-img').eq(i).attr("id", `${heroData[i].localized_name}`);
+            $('.hero-name').eq(i).text(`${heroData[i].localized_name}`);
+            $('.winrate > span').eq(i).text(`${heroData[i].wins}/${heroData[i].games_played}`);
+            let winRate = (heroData[i].wins/heroData[i].games_played)*100;
+            $('.winrate > div > div').eq(i).width(`${winRate}%`);
+            //console.log($('.expand-heroes #'`${id}`));
+            //('.hero-img').eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
+        }
     });
+        
+    console.log($('.expand-heroes'));
+
 
     //let id = $('click-expand').attr('value');
-    console.log("id" + id);
+    //console.log("id" + id);
 
 
     
     /*
-    let placeHeroes = document.getElementById("hero-items-" + id);
-    //console.log(placeHeroes);    
-    let heroItem = `<div class="expand-container" id="hero-name">
-        <div class="expand-content">    
+    <tr> <!--hero-item-->
+    <td class="expand-content">
             <div class="flex-item">
                 <img src="img\\dotabg.jpg" class="hero-img" alt="">
                 <div>
-                    <span class="hero-name">hero</span><br>
+                    <span>hero</span>
                 </div>
-            </div>      
-        </div>
-        <div class="expand-content">
-            <span class="hero-item-wins">1</span>
+            </div>  
+        </td>
+        <td class="expand-content games-played">
+            <span>1</span>
             <div class="team-meter-outer">
                 <div class="team-meter-inner meter-color2"></div>
             </div>
-        </div>
-        <div class="expand-content">
-            <span class="hero-item-losses">1</span>
+        </td>
+        <td class="expand-content winrate">
+            <span>1</span>
             <div class="team-meter-outer">
                 <div class="team-meter-inner meter-color2"></div>
             </div>
-        </div>
-    </div>`;
-
-    for(let i = 0; i < 2; i ++){
-        placeHeroes.innerHTML += heroItem;
+        </td>
+    </tr>
     }*/
-    
+}
 
-    /*<!--expand html-->
-        <div class="team-expand">
-            <div class="expand-item">
-                <div class="expand-header-container">
-                    <div class="expand-header-content">most played heroes</div>
-                    <div class="expand-header-content">wins</div>
-                    <div class="expand-header-content">losses</div>                                        
-                </div>
-                <div class="expand-container">
-                    <div class="expand-content">    
-                        <div class="flex-item">
-                            <img src="img\\dotabg.jpg" class="hero-img" alt="">
-                            <div>
-                                <span class="hero-name">hero</span><br>
-                            </div>
-                        </div>      
-                    </div>
-                    <div class="expand-content">1
-                        <div class="team-meter-outer">
-                            <div class="team-meter-inner meter-color2"></div>
-                        </div>
-                    </div>
-                    <div class="expand-content">2
-                        <div class="team-meter-outer">
-                            <div class="team-meter-inner meter-color2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+function populate(){
 
-            <div class="expand-item">
-                <div class="expand-header-container">
-                    <div class="expand-header-content">Played Leagues games</div>
-                    <div class="expand-header-content">wins</div>
-                    <div class="expand-header-content">losses</div>                                        
-                </div>
-                <div class="expand-container">
-                    <div class="expand-content">3
-                        <span>team</span>                            
-                    </div>
-                    <div class="expand-content">4
-                        <div class="team-meter-outer">
-                            <div class="team-meter-inner meter-color2"></div>
-                        </div>
-                    </div>
-                    <div class="expand-content">5
-                        <div class="team-meter-outer">
-                            <div class="team-meter-inner meter-color2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!--end team & expand-->`;*/
 }
