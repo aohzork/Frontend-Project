@@ -1,38 +1,21 @@
 
-let teamsLength = 30;
-let teams = [];    //holding class-instances of teams from api
-let heroes = [];   //holding class-instances of heroes from api
+let teamsLength = 30;   //change how many teams to display
+let heroLength = 5;     //change how many heroes per team to display
+
+let teams = [];         //holding class-instances of teams from api
+let heroes = [];        //holding class-instances of heroes from api
 
 //initiate team instances with arbitrary data
-for(let i =0; i < 2; i++){
+for(let i =0; i < teamsLength; i++){
     teams.push(new Team(3,1,1,1,"hello","hello"));
 }
 
+//initiate heroinstances with arbitrary data (119 currently total amount of heroes in the game)
 for(let i = 0; i < 119; i++){
     heroes.push(new Hero(1,"hi","a", "a", [],"img"));
 }
 
 $(document).ready(function(){
-
-    $('.click-expand').click(function(){
-        let clickedBtn = $('.click-expand').index($(this));
-        //console.log(clickedBtn);
-        let expandTeamHTML = $('.team-expand');
-        
-        //let passID = $('.click-expand').attr("id");
-        let passID = $(this).attr("id");
-        //console.log(passID);
-        expandItems(passID);
-
-        if(expandTeamHTML[clickedBtn].style.display=== "none") {
-            expandTeamHTML[clickedBtn].style.display = "flex";
-        } 
-        else {
-            expandTeamHTML[clickedBtn].style.display = "none";
-        }
-    
-    });
-
 
     let urls = ["https://api.opendota.com/api/teams"
                 ,"https://api.opendota.com/api/heroStats"];
@@ -46,15 +29,13 @@ $(document).ready(function(){
             switch(i){
                 case 0:
                     //change arbitrary data for api-data
-                    for(let y = 0; y < 2; y++){
+                    for(let y = 0; y < teamsLength; y++){
                         teams[y].teamId = data[y].team_id;
                         teams[y].rating = data[y].rating;
                         teams[y].wins = data[y].wins;
                         teams[y].losses = data[y].losses;
                         teams[y].name = data[y].name;
-                        teams[y].logo = data[y].logo_url;                         
-                    
-                        
+                        teams[y].logo = data[y].logo_url;                                                                     
                     }
 
                     displayTeams();
@@ -71,8 +52,7 @@ $(document).ready(function(){
                         heroes[y].roles = data[y].roles;
                         heroes[y].img = data[y].img;
                     }
-                        
-                       
+                                               
                     break;
             };
 
@@ -110,6 +90,7 @@ function displayTeams(){
     </div>
     <div id="teams"><!--generate teams html here--></div>`;
 
+    //place header
     placeHeader.innerHTML = teamHeader;
     
     //teamItem
@@ -186,13 +167,12 @@ function displayTeams(){
         </div><!-- end expand team-->
     </div> <!--end team-->`;
 
-    //later for-loop < teamslength, create html for all teams
-    for(let i = 0; i < 2; i++){
+    //generate html for all teams
+    for(let i = 0; i < teamsLength; i++){
         placeTeams.innerHTML += teamItem;
     }
 
     
-
     //hero-item
     let placeHeroes = document.getElementsByClassName("expand-heroes");
     console.log(placeHeroes);
@@ -212,24 +192,19 @@ function displayTeams(){
             </div>
         </td>
     </tr>`;
-       
+    
+    //generate html for heroes
     for(let i = 0; i < placeHeroes.length; i++){
-        for(let y = 0; y < 5; y++){
+        for(let y = 0; y < heroLength; y++){
             placeHeroes[i].innerHTML += heroItem;
         }
     }
-       
+
+    //highest teamrating = 100% width
+    let teamsRating = Teams[0].rating;
     
-    /*$('.team-item').each(function(i){
-        this.id = `${teams[i].teamId}`;
-    });*/
-
-    //console.log("in showTeams");
-    //console.log(teams);
-    //console.log(teams[0].teamId);
-
     //populate each team with data
-    for(let i = 0; i <2; i++){
+    for(let i = 0; i <teamsLength; i++){
         $('.team-item').eq(i).attr("id",`${teams[i].teamId}`);
         $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
         $('.team-name').eq(i).text(`${teams[i].name}`);
@@ -263,10 +238,7 @@ function displayTeams(){
         else {
             expandTeamHTML[clickedBtn].style.display = "flex";
         }
-    
-    });
-
-    
+    });    
 }
 
 //populate hero data and league data when click button
@@ -274,26 +246,24 @@ function expandItems(btnID){
     let id = btnID;
     console.log(heroes);
 
-    let heroLength = 5;
+    console.log("this");
+    let h = $(this);
+ 
+    //let heroLength = 5;
     let hImgURL = [];
     let heroData = [];
-
-    
+   
     //get team hero data
     let teamsHeroUrl = "https://api.opendota.com/api/teams/" + id + "/heroes";
     fetch(teamsHeroUrl).then(resp => resp.json()).then(function(data){
-
-    
-        
-       
+      
         for(let i = 0; i < heroLength; i++){
             heroData[i] = data[i];
             hImgURL[i] = heroes.filter(function(item){
                 return item.id === heroData[i].hero_id;
             }).map(function(item){
                 return item.img;
-            });
-            
+            });           
         }
 
         console.log(data);
@@ -306,49 +276,16 @@ function expandItems(btnID){
     }).then(function(){
         //populate heroes with data
         for(let i = 0; i < heroLength; i++){
-            $('.hero-img').eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
-            $('.hero-img').eq(i).attr("id", `${heroData[i].localized_name}`);
-            $('.hero-name').eq(i).text(`${heroData[i].localized_name}`);
-            $('.winrate > span').eq(i).text(`${heroData[i].wins}/${heroData[i].games_played}`);
+            $(`#hero-items-${id} .hero-img`).eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
+            $(`#hero-items-${id} .hero-name`).eq(i).text(`${heroData[i].localized_name}`);
+            $(`#hero-items-${id} .winrate > span`).eq(i).text(`${heroData[i].wins}/${heroData[i].games_played}`);
             let winRate = (heroData[i].wins/heroData[i].games_played)*100;
-            $('.winrate > div > div').eq(i).width(`${winRate}%`);
-            //console.log($('.expand-heroes #'`${id}`));
-            //('.hero-img').eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
+            $(`#hero-items-${id} .winrate > div > div`).eq(i).width(`${winRate}%`);
         }
     });
-        
-    console.log($('.expand-heroes'));
 
-
-    //let id = $('click-expand').attr('value');
-    //console.log("id" + id);
-
-
-    
-    /*
-    <tr> <!--hero-item-->
-    <td class="expand-content">
-            <div class="flex-item">
-                <img src="img\\dotabg.jpg" class="hero-img" alt="">
-                <div>
-                    <span>hero</span>
-                </div>
-            </div>  
-        </td>
-        <td class="expand-content games-played">
-            <span>1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
-        </td>
-        <td class="expand-content winrate">
-            <span>1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
-        </td>
-    </tr>
-    }*/
+    console.log("logga expand contents");
+    console.log($(`#hero-items-${id} .hero-img`));   
 }
 
 function populate(){
