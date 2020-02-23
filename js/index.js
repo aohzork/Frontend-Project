@@ -107,8 +107,8 @@ function displayTeams(){
                     </div>
                 </div>                
             </div>                    
-            <div class="team-content">
-                <span class="team-rating">11245</span>
+            <div class="team-content team-rating">
+                <span>11245</span>
                 <div class="team-meter-outer">
                     <div class="team-meter-inner meter-color1"></div>
                 </div>
@@ -200,15 +200,17 @@ function displayTeams(){
         }
     }
 
-    //highest teamrating = 100% width
-    let teamsRating = Teams[0].rating;
+    //highest teamrating = 100%
+    let teamsRating = teams[0].rating;
     
     //populate each team with data
     for(let i = 0; i <teamsLength; i++){
         $('.team-item').eq(i).attr("id",`${teams[i].teamId}`);
         $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
         $('.team-name').eq(i).text(`${teams[i].name}`);
-        $('.team-rating').eq(i).text(`${teams[i].rating}`);
+        $('.team-rating > span').eq(i).text(`${teams[i].rating}`);
+        let tRatingCSS = (teams[i].rating/teamsRating)*100;
+        $('.team-rating > div > div').eq(i).width(`${tRatingCSS}%`);
         $('.team-wins > span').eq(i).text(`${teams[i].wins}`);
         $('.team-losses > span').eq(i).text(`${teams[i].losses}`);
         let lossesCSS = teams[i].losses/(teams[i].wins + teams[i].losses)*100;
