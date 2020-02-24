@@ -1,6 +1,12 @@
 
+//-----------------------------------------------------------------
+//          CHANGE ONLY THESE PARAMETERS TO ADJUST PROGRAM
+//-----------------------------------------------------------------
+
 let teamsLength = 30;   //change how many teams to display
 let heroLength = 5;     //change how many heroes per team to display
+
+//-----------------------------------------------------------------
 
 let teams = [];         //holding class-instances of teams from api
 let heroes = [];        //holding class-instances of heroes from api
