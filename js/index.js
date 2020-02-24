@@ -109,7 +109,7 @@ function displayTeams(){
                     <img src="img\\dotabg.jpg" class="team-logo" alt="">
                     <div>
                         <span class="team-name">team</span><br>
-                        <button class="click-expand">click me</button>
+                        <button class="click-expand">Show Details</button>
                     </div>
                 </div>                
             </div>                    
@@ -141,35 +141,7 @@ function displayTeams(){
                     </thead>
                     <tbody class="expand-heroes" id="hero-items-"><!-- generate hero html here--></tbody>
                 </table>                                                                    
-            </div> <!--end expand-item-->
-            <div class="expand-item">
-                <table>
-                    <thead>
-                        <th>Played Leagues games</th>
-                        <th>wins</th>
-                        <th>losses</th>
-                    </thead>
-                    <tbody class="expand-container" id="team-id"><!--insert league html here-->
-                        <tr class="league-item">
-                            <td class="expand-content">
-                                <span>League name</span><br>
-                            </td>
-                            <td class="expand-content">
-                                <span>1</span>
-                                <div class="team-meter-outer">
-                                    <div class="team-meter-inner meter-color2"></div>
-                                </div>
-                            </td>
-                            <td class="expand-content">
-                                <span>1</span>
-                                <div class="team-meter-outer">
-                                    <div class="team-meter-inner meter-color2"></div>
-                                </div>
-                            </td>
-                        </tr>                                                                
-                    </tbody>
-                </table>                                                                    
-            </div> <!--end expand-item-->
+            </div> <!--end expand-item-->           
         </div><!-- end expand team-->
     </div> <!--end team-->`;
 
@@ -235,6 +207,8 @@ function displayTeams(){
         //console.log(clickedBtn);
         let expandTeamHTML = $('.team-expand');
         
+        
+
         //let passID = $('.click-expand').attr("id");
         let passID = $(this).attr("id");
         //console.log(passID);
@@ -242,9 +216,11 @@ function displayTeams(){
 
         if(expandTeamHTML[clickedBtn].style.display=== "flex") {
             expandTeamHTML[clickedBtn].style.display = "none";
+            $(this).html('Show Details');
         } 
         else {
             expandTeamHTML[clickedBtn].style.display = "flex";
+            $(this).html('Hide Details');
         }
     });    
 }

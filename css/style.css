@@ -17,6 +17,14 @@ body {
     background-color: rgb(56, 29, 20);
     margin: auto;
     position: relative;
+    text-transform: uppercase;
+}
+
+#logo-img{
+    padding: 5px 10px;
+    fill:red;
+    width:50px;
+    height: 50px;
 }
 
 .logo {
@@ -85,12 +93,10 @@ body {
 }
 
 .search h2 {
-
     font-size: 2.5em;
     color: white;
     text-transform: uppercase;
     margin-bottom: 10px;
-
 }
 
 .search form {
@@ -199,8 +205,9 @@ body {
 #content{
     width: 80%;
     margin: auto;
-    box-shadow: 0 0 50px 5px rgb(89, 100, 110);
+    box-shadow: 0 0 20px 5px rgb(89, 100, 110);
     color: lightgray;
+    text-transform: uppercase;
 }
 
 /**************************************
@@ -237,6 +244,11 @@ body {
     border-top: 1px solid rgb(59, 63, 68);
 }
 
+.team-container:hover{
+    background: #6d7c8b;
+    color: rgb(241, 240, 240);
+}
+
 .team-container, .team-content{
     height: auto;
 }
@@ -260,7 +272,7 @@ body {
 .team-meter-outer{
     width: 90%;
     height: 5px;
-    background-color:595f72;
+    background-color:#595f72;
 }
 
 .team-meter-inner{
@@ -268,15 +280,29 @@ body {
     height: 100%;
 }
 
-/*
-#d35269
-*/
 .meter-color1{
     background-color: #b3ca30;
 }
 
 .meter-color2{
     background-color: #fdf143;
+}
+
+/**************************************
+            EXPAND BUTTON
+**************************************/
+.click-expand{
+    background-color:#595f72;
+    padding:5px;
+    color: wheat;
+    border: 0;
+    margin-top: 6px;
+    outline:none;
+    width: 90px;
+}
+
+.click-expand:hover{
+    background-color:#acc3a6;
 }
 
 /**************************************
@@ -304,6 +330,7 @@ table{
 thead{
     text-align: left;
     text-transform: uppercase;
+    
 }
 
 tr:nth-child(odd) {
@@ -315,6 +342,7 @@ tr:nth-child(even) {
 
 th{
     padding: 7px 0;
+    background:#3f3c57;
 }
 
 th:first-child{
@@ -352,29 +380,6 @@ td:nth-child(n+2){
 /**************************************
                 @MEDIDA
 **************************************/
-@media all and (max-width: 1156px){
-    .hero-wrapper {
-        flex: 1 0 25%;
-    }
-
-    .hero-element h2 {
-        text-transform: uppercase;
-        font-size: 20px;
-        color: #fff;
-        padding: 10px 0;    
-    }
-
-    .hero-img {
-        width: 200px;
-        height: 112.5px;
-    }
-
-    .top-content {
-        margin: 370px 0;
-    }
-
-}
-
 @media all and (max-width: 902px){
     .hero-wrapper {
         flex: 1 0 45%;
@@ -400,17 +405,6 @@ td:nth-child(n+2){
 
     .top-content {
         margin: 220px 0;
-    }
-}
-
-@media all and (max-width: 630px){
-    .hero-img {
-        width: 200px;
-        height: 112.5px;
-    }
-
-    .top-content {
-        margin: 180px 0;
     }
 }
 
