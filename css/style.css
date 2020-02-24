@@ -72,7 +72,7 @@ body {
 
 
 /**************************************
-            TEAMS.HTML
+            SEARCH
 **************************************/
 .search{
     display: flex;
@@ -193,6 +193,156 @@ body {
  height: 144px;
 }
 
+/**************************************
+              CONTENT
+**************************************/
+#content{
+    width: 80%;
+    margin: auto;
+    box-shadow: 0 0 50px 5px rgb(89, 100, 110);
+    color: lightgray;
+}
+
+/**************************************
+                TEAM-STYLING
+**************************************/
+.team-header-container{
+    display: flex;
+    background-color:#3f3c57;
+}
+
+.team-header-container, .team-header-content{
+    height: auto;
+}
+
+.team-header-content{
+    padding: 12px 0;
+    text-transform: uppercase;
+}
+
+.team-header-content:first-child{
+    padding-left: 7px;
+}
+
+.team-header-content:first-child, .team-content:first-child{
+    flex:2;
+}
+.team-header-content:nth-child(n+2), .team-content:nth-child(n+2){
+    flex:1;
+}
+
+.team-container{
+    display: flex;
+    background: #708090;
+    border-top: 1px solid rgb(59, 63, 68);
+}
+
+.team-container, .team-content{
+    height: auto;
+}
+
+.team-content{
+    margin: auto;
+}
+
+.team-content img{
+    width: 50px;
+    height: 50px;
+    padding: 7px;
+    vertical-align: middle;
+}
+
+.flex-item{
+    display: flex;
+    align-items: center;
+}
+
+.team-meter-outer{
+    width: 90%;
+    height: 5px;
+    background-color:595f72;
+}
+
+.team-meter-inner{
+    width: 50%;
+    height: 100%;
+}
+
+/*
+#d35269
+*/
+.meter-color1{
+    background-color: #b3ca30;
+}
+
+.meter-color2{
+    background-color: #fdf143;
+}
+
+/**************************************
+            TEAM EXPAND
+**************************************/
+
+.team-expand{
+    height: 100%;
+    background-color: rgb(82, 94, 105);
+    display: none;
+   
+}
+
+.expand-item{
+    flex:1;
+}
+
+table{
+    width: 100%;
+    border:none;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+thead{
+    text-align: left;
+    text-transform: uppercase;
+}
+
+tr:nth-child(odd) {
+    background: rgb(82, 94, 105)
+}
+tr:nth-child(even) {
+    background: rgb(105, 120, 134)
+}
+
+th{
+    padding: 7px 0;
+}
+
+th:first-child{
+    padding-left:7px;
+}
+
+td:first-child{
+    width:67%;
+}
+td:nth-child(n+2){
+   width:33%;
+}
+
+.expand-container, .expand-content{
+    height: auto;
+}
+
+.expand-content{
+    margin: auto;
+}
+
+.expand-content img{
+    width: 100px;
+    height: 56.25px;
+    padding: 7px;
+    vertical-align: middle;
+}
+
 
 /**************************************
                 FOOTER
@@ -294,125 +444,3 @@ body {
     }
 }
 
-/**************************************
-              CONTENT
-**************************************/
-#content{
-    width: 80%;
-    margin: auto;
-}
-
-/**************************************
-                TEAM-STYLING
-**************************************/
-.team-header-container{
-    display: flex;
-    background: grey;
-}
-
-.team-header-container, .team-header-content{
-    height: auto;
-}
-
-.team-header-content{
-    padding: 7px 0;
-    text-transform: uppercase;
-}
-
-.team-header-content:first-child, .team-content:first-child{
-    flex:2;
-}
-.team-header-content:nth-child(n+2), .team-content:nth-child(n+2){
-    flex:1;
-}
-
-.team-container{
-    display: flex;
-    background: slategrey;
-}
-
-.team-container, .team-content{
-    height: auto;
-}
-
-.team-content{
-    margin: auto;
-}
-
-.team-content img{
-    width: 50px;
-    height: 50px;
-    padding: 7px;
-    vertical-align: middle;
-}
-
-.flex-item{
-    display: flex;
-    align-items: center;
-}
-
-.team-meter-outer{
-    width: 90%;
-    height: 5px;
-    background-color:darkgrey
-}
-
-.team-meter-inner{
-    width: 50%;
-    height: 100%;
-}
-
-.meter-color1{
-    background-color: red;
-}
-
-.meter-color2{
-    background-color: yellow;
-}
-
-/**************************************
-            TEAM EXPAND
-**************************************/
-
-.team-expand{
-    height: 100%;
-    background-color: lightcoral;
-    display: none;
-   
-}
-
-.expand-item{
-    flex:1;
-}
-
-table{
-    width: 100%;
-    border:1px solid;    
-}
-
-thead{
-    text-align: left;
-}
-
-td:first-child{
-    border:1px solid;
-    width:67%;
-}
-td:nth-child(n+2){
-   width:33%;
-}
-
-.expand-container, .expand-content{
-    height: auto;
-}
-
-.expand-content{
-    margin: auto;
-}
-
-.expand-content img{
-    width: 100px;
-    height: 56.25px;
-    padding: 7px;
-    vertical-align: middle;
-}
