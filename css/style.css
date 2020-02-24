@@ -280,12 +280,18 @@ body {
     height: 100%;
 }
 
+
+
 .meter-color1{
-    background-color: #b3ca30;
+    background-color: #fdf143;
 }
 
 .meter-color2{
-    background-color: #fdf143;
+    background-color: #b3ca30;
+}
+
+.meter-color3{
+    background-color: #fd436b;
 }
 
 /**************************************
@@ -336,9 +342,16 @@ thead{
 tr:nth-child(odd) {
     background: rgb(82, 94, 105)
 }
+
+tr:nth-child(odd) .team-meter-outer{
+    background: #697886;
+}
+
 tr:nth-child(even) {
     background: rgb(105, 120, 134)
 }
+
+
 
 th{
     padding: 7px 0;

@@ -39,7 +39,7 @@ let teamItemHtml = `<div class="-team-item" id ="team_id">
     <div class="team-content team-losses">
         <span>300</span>
         <div class="team-meter-outer">
-            <div class="team-meter-inner meter-color2"></div>
+            <div class="team-meter-inner meter-color3"></div>
         </div>
     </div>               
 </div>                
@@ -48,7 +48,7 @@ let teamItemHtml = `<div class="-team-item" id ="team_id">
         <table>
             <thead>
                 <th >most played heroes</th>
-                <th>wins/played games</th>
+                <th>wins / played games</th>
             </thead>
             <tbody class="expand-heroes" id="hero-items-"><!-- generate hero html here--></tbody>
         </table>                                                                    
@@ -69,7 +69,7 @@ let heroItemHtml = `<tr> <!--hero-item-->
     <td class="expand-content winrate">
         <span>1</span>
         <div class="team-meter-outer">
-            <div class="team-meter-inner meter-color2"></div>
+            <div class="team-meter-inner meter-color1"></div>
         </div>
     </td>
 </tr>`;

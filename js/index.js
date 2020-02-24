@@ -111,7 +111,12 @@ function displayTeams(){
         $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].teamId);
     }
 
-    //assign clickfunction to show more teamdetails
+    //click to show more teamdetails
+    clickToExpand();
+}
+
+//click to show more teamdetails
+function clickToExpand(){
     $('.click-expand').click(function(){
         let clickedBtn = $('.click-expand').index($(this));
         let expandTeamHTML = $('.team-expand');         
@@ -127,7 +132,7 @@ function displayTeams(){
             expandTeamHTML[clickedBtn].style.display = "flex";
             $(this).html('Hide Details');
         }
-    });    
+    });   
 }
 
 //populate hero data and league data when click button
@@ -158,13 +163,9 @@ function expandItems(btnID){
         for(let i = 0; i < heroLength; i++){
             $(`#hero-items-${id} .hero-img`).eq(i).attr("src",`https://api.opendota.com${hImgURL[i]}`);
             $(`#hero-items-${id} .hero-name`).eq(i).text(`${heroData[i].localized_name}`);
-            $(`#hero-items-${id} .winrate > span`).eq(i).text(`${heroData[i].wins}/${heroData[i].games_played}`);
+            $(`#hero-items-${id} .winrate > span`).eq(i).text(`${heroData[i].wins} / ${heroData[i].games_played}`);
             let winRate = (heroData[i].wins/heroData[i].games_played)*100;
             $(`#hero-items-${id} .winrate > div > div`).eq(i).width(`${winRate}%`);
         }
     });
-
-    console.log("logga expand contents");
-    console.log($(`#hero-items-${id} .hero-img`));  
-
 }
