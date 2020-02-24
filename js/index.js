@@ -287,9 +287,6 @@ function expandItems(btnID){
     });
 
     console.log("logga expand contents");
-    console.log($(`#hero-items-${id} .hero-img`));   
-}
-
-function populate(){
+    console.log($(`#hero-items-${id} .hero-img`));  
 
 }
