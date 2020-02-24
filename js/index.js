@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------
 //          CHANGE ONLY THESE PARAMETERS TO ADJUST PROGRAM
 //-----------------------------------------------------------------
@@ -31,7 +30,6 @@ $(document).ready(function(){
     for(let i = 0; i < urls.length; i++){
         fetch(urls[i]).then((resp) => resp.json()).then(function(data){
             console.log(data);
-            //console.log(data[500]);
             switch(i){
                 case 0:
                     //change arbitrary data for api-data
@@ -46,8 +44,6 @@ $(document).ready(function(){
 
                     displayTeams();
 
-                    //console.log(teams);
-                    //console.log(teams[0].teamId);
                     break;
                 case 1:
                     for(let y = 0; y < data.length; y++){
@@ -62,14 +58,10 @@ $(document).ready(function(){
                     break;
             };
 
-            //console.log(heroes);
         })
         .catch(function(error){
             console.log("cannot fetch data from " + urls[i]);
         });
-
-        //displayTeams();
-        //console.log(teams);
     }
 
     
@@ -77,27 +69,18 @@ $(document).ready(function(){
 });
 
 function displayTeams(){
-
-    //combine and sort out data from all these apis in different ways
-    //to get the data needed for each team
-    //https://api.opendota.com/api/teams
-    //https://api.opendota.com/api/teams/1838315/heroes
-    //https://api.opendota.com/api/teams/{team_id}/heroes
-    //https://api.opendota.com/api/leagues
-    
-
+  
     //teamheader
     let placeHeader = document.getElementById('content');
-    let teamHeader = `<div class="team-header-container">
+    /*let teamHeader = `<div class="team-header-container">
         <div class="team-header-content">name</div>
         <div class="team-header-content">rating</div>
         <div class="team-header-content">wins</div>
         <div class="team-header-content">losses</div>
     </div>
-    <div id="teams"><!--generate teams html here--></div>`;
+    <div id="teams"><!--generate teams html here--></div>`;*/
 
-    //place header
-    placeHeader.innerHTML = teamHeader;
+    placeHeader.innerHTML = generateHTML(teamHeaderHtml);
     
     //teamItem
     let placeTeams = document.getElementById('teams');
@@ -153,7 +136,6 @@ function displayTeams(){
     
     //hero-item
     let placeHeroes = document.getElementsByClassName("expand-heroes");
-    console.log(placeHeroes);
     let heroItem = `<tr> <!--hero-item-->
     <td class="expand-content">
             <div class="flex-item">
@@ -187,16 +169,22 @@ function displayTeams(){
         $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
         $('.team-name').eq(i).text(`${teams[i].name}`);
         $('.team-rating > span').eq(i).text(`${teams[i].rating}`);
+
         let tRatingCSS = (teams[i].rating/teamsRating)*100;
+        
         $('.team-rating > div > div').eq(i).width(`${tRatingCSS}%`);
         $('.team-wins > span').eq(i).text(`${teams[i].wins}`);
         $('.team-losses > span').eq(i).text(`${teams[i].losses}`);
+       
         let lossesCSS = teams[i].losses/(teams[i].wins + teams[i].losses)*100;
         let winsCSS = teams[i].wins/(teams[i].wins + teams[i].losses)*100;
+       
         $('.team-wins > div > div').eq(i).width(`${winsCSS}%`);
         $('.team-losses > div > div').eq(i).width(`${lossesCSS}%`);
+       
         console.log(lossesCSS);
         console.log(winsCSS);
+       
         $('.click-expand').eq(i).attr("id", `${teams[i].teamId}`);
         $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].teamId);
     }
@@ -233,7 +221,6 @@ function expandItems(btnID){
     console.log("this");
     let h = $(this);
  
-    //let heroLength = 5;
     let hImgURL = [];
     let heroData = [];
    

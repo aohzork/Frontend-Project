@@ -21,13 +21,6 @@ var Team = /** @class */ (function () {
     }
     return Team;
 }());
-//export = Team;
-var League = /** @class */ (function () {
-    function League(placeholder2, placeholder3) {
-        this.placeholder = placeholder2;
-    }
-    return League;
-}());
 var PlayHero = /** @class */ (function () {
     function PlayHero(heroId, name, gamesPlayed, wins) {
         this.heroId = heroId;
@@ -36,10 +29,4 @@ var PlayHero = /** @class */ (function () {
         this.wins = wins;
     }
     return PlayHero;
-}());
-var Match = /** @class */ (function () {
-    function Match(placeholder2, placeholder3) {
-        this.placeholder = placeholder2;
-    }
-    return Match;
 }());
