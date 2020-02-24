@@ -1,7 +1,9 @@
+//universal function to use throughout app
 function generateHTML(gen){
     return gen;
 }
 
+//generate teamheader
 let teamHeaderHtml = `<div class="team-header-container">
 <div class="team-header-content">name</div>
 <div class="team-header-content">rating</div>
@@ -10,6 +12,7 @@ let teamHeaderHtml = `<div class="team-header-container">
 </div>
 <div id="teams"><!--generate teams html here--></div>`;
 
+//generate team-item
 let teamItemHtml = `<div class="-team-item" id ="team_id">
 <div class="team-container">           
     <div class="team-content">
@@ -53,6 +56,7 @@ let teamItemHtml = `<div class="-team-item" id ="team_id">
 </div><!-- end expand team-->
 </div> <!--end team-->`;
 
+//generate hero-item
 let heroItemHtml = `<tr> <!--hero-item-->
 <td class="expand-content">
         <div class="flex-item">

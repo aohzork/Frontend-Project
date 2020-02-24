@@ -63,100 +63,25 @@ $(document).ready(function(){
             console.log("cannot fetch data from " + urls[i]);
         });
     }
-
-    
-
 });
 
 function displayTeams(){
   
-    //teamheader
+    //generate teamheader
     let placeHeader = document.getElementById('content');
-    /*let teamHeader = `<div class="team-header-container">
-        <div class="team-header-content">name</div>
-        <div class="team-header-content">rating</div>
-        <div class="team-header-content">wins</div>
-        <div class="team-header-content">losses</div>
-    </div>
-    <div id="teams"><!--generate teams html here--></div>`;*/
-
     placeHeader.innerHTML = generateHTML(teamHeaderHtml);
     
-    //teamItem
+    //generate teams
     let placeTeams = document.getElementById('teams');
-    console.log(placeTeams);
-    let teamItem = `<div class="-team-item" id ="team_id">
-        <div class="team-container">           
-            <div class="team-content">
-                <div class="flex-item">
-                    <img src="img\\dotabg.jpg" class="team-logo" alt="">
-                    <div>
-                        <span class="team-name">team</span><br>
-                        <button class="click-expand">Show Details</button>
-                    </div>
-                </div>                
-            </div>                    
-            <div class="team-content team-rating">
-                <span>11245</span>
-                <div class="team-meter-outer">
-                    <div class="team-meter-inner meter-color1"></div>
-                </div>
-            </div>
-            <div class="team-content team-wins">
-                <span>500</span>
-                <div class="team-meter-outer">
-                    <div class="team-meter-inner meter-color2"></div>
-                </div>
-            </div>
-            <div class="team-content team-losses">
-                <span>300</span>
-                <div class="team-meter-outer">
-                    <div class="team-meter-inner meter-color2"></div>
-                </div>
-            </div>               
-        </div>                
-        <div class="team-expand"> <!--expand team-->
-            <div class="expand-item">
-                <table>
-                    <thead>
-                        <th >most played heroes</th>
-                        <th>wins/played games</th>
-                    </thead>
-                    <tbody class="expand-heroes" id="hero-items-"><!-- generate hero html here--></tbody>
-                </table>                                                                    
-            </div> <!--end expand-item-->           
-        </div><!-- end expand team-->
-    </div> <!--end team-->`;
-
-    //generate html for all teams
     for(let i = 0; i < teamsLength; i++){
-        placeTeams.innerHTML += teamItem;
+        placeTeams.innerHTML += generateHTML(teamItemHtml);
     }
-
-    
-    //hero-item
+   
+    //generate heroes
     let placeHeroes = document.getElementsByClassName("expand-heroes");
-    let heroItem = `<tr> <!--hero-item-->
-    <td class="expand-content">
-            <div class="flex-item">
-                <img src="img\\dotabg.jpg" class="hero-img" alt="">
-                <div>
-                    <span class="hero-name">hero</span>
-                </div>
-            </div>  
-        </td>
-        <td class="expand-content winrate">
-            <span>1</span>
-            <div class="team-meter-outer">
-                <div class="team-meter-inner meter-color2"></div>
-            </div>
-        </td>
-    </tr>`;
-    
-    //generate html for heroes
     for(let i = 0; i < placeHeroes.length; i++){
         for(let y = 0; y < heroLength; y++){
-            placeHeroes[i].innerHTML += heroItem;
+            placeHeroes[i].innerHTML += generateHTML(heroItemHtml);
         }
     }
 
@@ -182,9 +107,6 @@ function displayTeams(){
         $('.team-wins > div > div').eq(i).width(`${winsCSS}%`);
         $('.team-losses > div > div').eq(i).width(`${lossesCSS}%`);
        
-        console.log(lossesCSS);
-        console.log(winsCSS);
-       
         $('.click-expand').eq(i).attr("id", `${teams[i].teamId}`);
         $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].teamId);
     }
@@ -192,14 +114,9 @@ function displayTeams(){
     //assign clickfunction to show more teamdetails
     $('.click-expand').click(function(){
         let clickedBtn = $('.click-expand').index($(this));
-        //console.log(clickedBtn);
-        let expandTeamHTML = $('.team-expand');
-        
-        
-
-        //let passID = $('.click-expand').attr("id");
+        let expandTeamHTML = $('.team-expand');         
         let passID = $(this).attr("id");
-        //console.log(passID);
+
         expandItems(passID);
 
         if(expandTeamHTML[clickedBtn].style.display=== "flex") {
@@ -216,10 +133,7 @@ function displayTeams(){
 //populate hero data and league data when click button
 function expandItems(btnID){
     let id = btnID;
-    console.log(heroes);
-
-    console.log("this");
-    let h = $(this);
+    //let h = $(this);
  
     let hImgURL = [];
     let heroData = [];
@@ -236,11 +150,6 @@ function expandItems(btnID){
                 return item.img;
             });           
         }
-
-        console.log(data);
-        console.log(heroData[0].hero_id);
-        console.log(hImgURL[0]);
-                
     })
     .catch(function(error){
         console.log("cannot fetch data from " + teamsHeroUrl);
