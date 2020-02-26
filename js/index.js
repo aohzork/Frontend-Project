@@ -7,66 +7,30 @@ let heroLength = 5;     //change how many heroes per team to display
 
 //-----------------------------------------------------------------
 
-let teams = [];         //holding class-instances of teams from api
-let heroes = [];        //holding class-instances of heroes from api
+let teams = [];
+let heroes = [];
 
-//initiate team instances with arbitrary data
+//initiate Team instances with arbitrary data
 for(let i =0; i < teamsLength; i++){
     teams.push(new Team(3,1,1,1,"hello","hello"));
 }
 
-//initiate heroinstances with arbitrary data (119 currently total amount of heroes in the game)
+//initiate Hero instances with arbitrary data (119 in API)
 for(let i = 0; i < 119; i++){
     heroes.push(new Hero(1,"hi","a", "a", [],"img"));
 }
 
 $(document).ready(function(){
-
-    let urls = ["https://api.opendota.com/api/teams"
-                ,"https://api.opendota.com/api/heroStats"];
-    let requests = new Array(urls.length);
-
-    //extract api-data into class objects, put in array
-    for(let i = 0; i < urls.length; i++){
-        fetch(urls[i]).then((resp) => resp.json()).then(function(data){
-            console.log(data);
-            switch(i){
-                case 0:
-                    //change arbitrary data for api-data
-                    for(let y = 0; y < teamsLength; y++){
-                        teams[y].teamId = data[y].team_id;
-                        teams[y].rating = data[y].rating;
-                        teams[y].wins = data[y].wins;
-                        teams[y].losses = data[y].losses;
-                        teams[y].name = data[y].name;
-                        teams[y].logo = data[y].logo_url;                                                                     
-                    }
-
-                    displayTeams();
-
-                    break;
-                case 1:
-                    for(let y = 0; y < data.length; y++){
-                        heroes[y].id = data[y].id;
-                        heroes[y].name = data[y].localized_name;
-                        heroes[y].primaryAttr = data[y].primary_attr;
-                        heroes[y].attackType = data[y].attack_type;
-                        heroes[y].roles = data[y].roles;
-                        heroes[y].img = data[y].img;
-                    }
-                                               
-                    break;
-            };
-
-        })
-        .catch(function(error){
-            console.log("cannot fetch data from " + urls[i]);
-        });
-    }
+    
+    let urlTeam = "https://api.opendota.com/api/teams";
+    let urlHero = "https://api.opendota.com/api/heroStats";
+    getApi(urlTeam,teams,teamsLength,displayTeams);
+    getApi(urlHero,heroes);
+    
 });
 
 function displayTeams(){
-  
+
     //generate teamheader
     let placeHeader = document.getElementById('content');
     placeHeader.innerHTML = generateHTML(teamHeaderHtml);
@@ -90,8 +54,8 @@ function displayTeams(){
     
     //populate each team with data
     for(let i = 0; i <teamsLength; i++){
-        $('.team-item').eq(i).attr("id",`${teams[i].teamId}`);
-        $('.team-logo').eq(i).attr("src",`${teams[i].logo}`);
+        $('.team-item').eq(i).attr("id",`${teams[i].team_id}`);
+        $('.team-logo').eq(i).attr("src",`${teams[i].logo_url}`);
         $('.team-name').eq(i).text(`${teams[i].name}`);
         $('.team-rating > span').eq(i).text(`${teams[i].rating}`);
 
@@ -107,8 +71,8 @@ function displayTeams(){
         $('.team-wins > div > div').eq(i).width(`${winsCSS}%`);
         $('.team-losses > div > div').eq(i).width(`${lossesCSS}%`);
        
-        $('.click-expand').eq(i).attr("id", `${teams[i].teamId}`);
-        $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].teamId);
+        $('.click-expand').eq(i).attr("id", `${teams[i].team_id}`);
+        $('.expand-heroes').eq(i).attr("id", "hero-items-" + teams[i].team_id);
     }
 
     //click to show more teamdetails
@@ -137,9 +101,8 @@ function clickToExpand(){
 
 //populate hero data and league data when click button
 function expandItems(btnID){
+    
     let id = btnID;
-    //let h = $(this);
- 
     let hImgURL = [];
     let heroData = [];
    

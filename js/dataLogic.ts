@@ -1,48 +1,35 @@
 class Hero {
   id:number;
-  name: string;
-  primaryAttr: string;
-  attackType: string;
+  localized_name: string;
+  primary_attr: string;
+  attack_type: string;
   roles: Array<string>; 
   img: string;
 
-  constructor(id: number, name: string, primaryAttr: string, attackType: string, roles: Array<string>, img: string) {
+  constructor(id: number, localized_name: string, primary_attr: string, attack_type: string, roles: Array<string>, img: string) {
     this.id = id;
-    this.name = name;
-    this.primaryAttr = primaryAttr;
-    this.attackType = attackType;
+    this.localized_name = localized_name;
+    this.primary_attr = primary_attr;
+    this.attack_type = attack_type;
     this.roles = roles;
     this.img = img;
   }
 }
 
 class Team {
-  teamId: number;
+  team_id: number;
   rating: number;
   wins: number;
   losses: number;
   name: string;
-  logo: string;
+  logo_url: string;
   
-  constructor(teamId: number, rating: number, wins: number, losses: number, name: string, logo: string) {
-    this.teamId = teamId;
+  constructor(team_id: number, rating: number, wins: number, losses: number, name: string, logo_url: string) {
+    this.team_id = team_id;
     this.rating = rating;
     this.wins = wins;
     this.losses = losses;
     this.name = name;
-    this.logo = logo;
-  }
-}
-
-class PlayHero {
-  heroId: number;
-  name: string;
-  gamesPlayed: number;
-  wins: number;
-  constructor(heroId: number, name: string, gamesPlayed: number, wins: number) {
-    this.heroId = heroId;
-    this.name = name;
-    this.gamesPlayed = gamesPlayed;
-    this.wins = wins
+    this.logo_url = logo_url;
   }
 }

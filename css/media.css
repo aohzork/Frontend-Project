@@ -1,0 +1,63 @@
+/**************************************
+                @MEDIDA
+**************************************/
+@media all and (max-width: 902px){
+    .logo-text{
+        font-size: 12px;
+    }
+}
+
+@media all and (max-width: 768px){
+    .logo-text{
+        font-size: 10px;
+    }
+
+    .footer{
+        padding: 30px 0;
+    }
+
+    .footer-wrapper-inner{
+        flex-direction: column;
+    }
+
+    .footer-item{
+        padding: 20px 0;
+    }
+
+    .footer-item:nth-child(2){
+        border-top: 3px solid #595f72;
+        border-bottom: 3px solid #595f72;
+        border-left: 0px;
+        border-right: 0px;
+    }
+}
+
+@media all and (max-width: 500px){
+    .header{
+        flex-direction: column;
+    }
+
+    .menu{
+        flex:1;
+        width:100%;
+    }
+
+    .menu ul{
+        text-align: center;
+    }
+
+    .menu ul li {
+        display: block;
+        padding:10px;
+        font-size:12px;
+        margin: auto; 
+    }
+
+    .menu ul li:hover{
+        background-color: rgba(121, 63, 44, 0.7) ;    
+    }
+
+    .footer h2{
+        font-size: 20px;
+    }
+}
